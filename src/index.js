@@ -1,50 +1,37 @@
-import React, { StrictMode } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 
-// For simple 1 taggers:
-// function Greetings() {
-//   return <h2>My First Component</h2>;
-// }
-
-// another way to do that:
-// function Greetings() {
-//   return React.createElement("h2", {}, "My First Components");
-// }
-
-// to include more than 1 tag:
-// function Greetings() {
-//   return React.createElement(
-//     "div",
-//     {},
-//     React.createElement("h2", {}, "This is our last Component")
-//   );
-// }
-
-// the simpliffied version:
-// function Greeting2() {
-//   return (
-//     <div>
-//       <h2>My Last Simplified Component</h2>
-//     </div>
-//   );
-// }
+import "./styles.css";
 
 // nested Components:
-function Greet() {
+function BookList() {
   return (
-    <StrictMode>
-      <div>
-        <h2>Uriel Pardes</h2>
-        <Job />
-        <Age />
-      </div>
-    </StrictMode>
+    <section className="bookList">
+      <Book />
+      <Book />
+      <Book />
+    </section>
   );
 }
 
-const Job = () => <p>Position: Full Stack Dev</p>;
-const Age = () => <p>Age:47</p>;
+const Book = () => {
+  return (
+    <article className="book">
+      <Image />
+      <Title />
+      <Author />
+    </article>
+  );
+};
+
+const Image = () => (
+  <img
+    src="https://images-na.ssl-images-amazon.com/images/I/812XbpMDovL._AC_UL600_SR600,400_.jpg"
+    alt="book cover"
+  />
+);
+const Title = () => <h2>A Court of Mist and Fury</h2>;
+const Author = () => <h4>by Sarah J. Maas </h4>;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(<Greet />);
+root.render(<BookList />);
