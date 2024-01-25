@@ -21,9 +21,15 @@ body {
 
 .book {
   background-color: #fff;
+  color: #617d98;
   text-align: center;
   border-radius: 1rem;
   padding: 2rem;
+}
+
+.book h2 {
+  color: black;
+  font-size: 0.75rem;
 }
 
 .book img {
