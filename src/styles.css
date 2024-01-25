@@ -28,13 +28,21 @@ body {
 }
 
 .book h2 {
-  color: black;
-  font-size: 0.75rem;
+  color: red;
+  font-size: 1.2rem;
+}
+
+.book h4 {
+  margin-top: 1rem;
 }
 
 .book img {
   width: 100%;
   object-fit: cover;
+}
+
+.book p {
+  color: black;
 }
 
 @media screen and (min-width: 780px) {
