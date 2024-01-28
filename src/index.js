@@ -70,12 +70,14 @@ const Book = (props) => {
 
 {
   /* Adding props destructuring:
-const Book = ({ img, title, author }) => {
+const Book = ({ img, title, description, author, children }) => {
    return (
      <article className="book">
        <img src={img} alt="book cover" />
        <h2>{title}</h2>
+       <p>{description}</p>
        <h4>{author}</h4>
+       { children }
      </article>
    );
 

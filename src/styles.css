@@ -30,6 +30,7 @@ body {
 .book h2 {
   color: red;
   font-size: 1.2rem;
+  margin-top: 1rem;
 }
 
 .book h4 {
