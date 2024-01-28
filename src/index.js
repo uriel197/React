@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import "./styles.css";
-import { books } from "./books";
+import { books } from "./books";  /* 1 */
 import Book from "./Book";
 
 // nested Components:
@@ -21,17 +21,14 @@ root.render(<BookList />);
 
 /************ COMMENTS ***********
 
-***1: <Book key={book.id} {...book}></Book>;
-We are still rendering the Book component, but there's a change in how the book prop is passed.
-key={book.id} remains, providing a unique identifier for each book.
-{...book} is the spread operator, which spreads the properties of the book object as separate props for the Book component.
-Destructuring in Book Component:
+***1: The use of curly braces {} in the import statement is related to the way modules are exported in JavaScript.
 
-const { img, title, description, author } = props;
-Instead of explicitly accessing props.book, we are now directly destructuring the properties from the props object, meaning "props" is back to being a single object with the properties { img, title, description, author } as opposed to being an object that contains the object book.
-This assumes that the Book component receives the entire book object as props.
-So, with the spread operator {...book}, we are essentially passing each property of the book object as a separate prop to the Book component. Then, in the Book component, you can destructure those props directly.
+import { books } from "./books";
 
-This approach is convenient and concise, as it allows you to pass all properties of the book object to the Book component without explicitly specifying each one.
+When you see curly braces around the import, it typically means that the module you are importing is using named exports. In the ./books module, there is likely a named export named books.
+If in your ./books file, you have something like export const books = [...], then you need to use curly braces to import the named export.
+import Book from "./Book";
 
+When there are no curly braces, it usually means that the module is using the default export. In the ./Book module, there is likely a default export, which is the single value or object/function that is considered the "default" export for that module.
+If in your ./Book file, you have something like export default Book;, then you can import it without curly braces.
 */
