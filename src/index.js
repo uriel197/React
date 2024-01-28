@@ -35,7 +35,7 @@ function BookList() {
   return (
     <section className="bookList">
       {books.map((book) => {
-        return <Book key={book.id} book={book}></Book>; /* 1 */
+        return <Book key={book.id} {...book}></Book>; /* 1 */
       })}
     </section>
   );
@@ -43,13 +43,18 @@ function BookList() {
 
 // Adding props:
 const Book = (props) => {
-  const { img, title, description, author } = props.book;
+  const { img, title, description, author } = props;
+  const buttonHandler = () => alert(`clicked on ${title} by ${author}`);
+  const onHover = () => console.log(author); /* 2 */
   return (
-    <article className="book">
+    <article className="book" onMouseEnter={onHover}>
       <img src={img} alt="book cover" />
       <h2>{title}</h2>
       <p>{description}</p>
       <h4>{author}</h4>
+      <button type="button" onClick={buttonHandler}>
+        Book title
+      </button>
     </article>
   );
 };
@@ -59,18 +64,18 @@ root.render(<BookList />);
 
 /************ COMMENTS ***********
 
-***1: In the provided code, the line "<Book book={book}></Book>" is part of the BookList component.  this line is creating and rendering a Book component for each book in the books array, and it's passing the corresponding book object as a prop named book to each Book component. The Book component then uses this prop to display the details of the book, such as the title, description, author, and image.
-The choice of naming the prop as book is arbitrary and determined by the developer who wrote the code. In React, when you create a component and pass data to it using props, you can choose any valid JavaScript identifier as the name for the prop.
-In this specific case:
-<Book book={book}></Book>
-The prop being passed is named book, and it receives the current book object from the map iteration over the books array. The decision to name it book is likely based on the context of the application. Since each iteration represents a book from the array, using a prop name like book makes sense for clarity and readability.
+***1: <Book key={book.id} {...book}></Book>;
+We are still rendering the Book component, but there's a change in how the book prop is passed.
+key={book.id} remains, providing a unique identifier for each book.
+{...book} is the spread operator, which spreads the properties of the book object as separate props for the Book component.
+Destructuring in Book Component:
 
-key={book.id} The key attribute is used in React when rendering a list of elements to help React identify which items have changed, been added, or been removed. It is important for optimizing the performance of rendering lists.
-Here's why using a key is important:
+const { img, title, description, author } = props;
+Instead of explicitly accessing props.book, we are now directly destructuring the properties from the props object, meaning "props" is back to being a single object with the properties { img, title, description, author } as opposed to being an object that contains the object book.
+This assumes that the Book component receives the entire book object as props.
+So, with the spread operator {...book}, we are essentially passing each property of the book object as a separate prop to the Book component. Then, in the Book component, you can destructure those props directly.
 
-Efficient Reconciliation: React uses the key to efficiently update the DOM when the list of items changes. When a list is re-rendered, React needs a way to quickly identify which items have been added, removed, or changed. The key helps React perform this reconciliation more efficiently.
+This approach is convenient and concise, as it allows you to pass all properties of the book object to the Book component without explicitly specifying each one.
 
-Avoiding Unnecessary Re-renders: Without a unique key, React may have to re-render the entire list when any change occurs. With a key, React can identify specific elements and update only the elements that have changed, leading to better performance.
-
-Stable Identity for Components: The key provides a stable identity for each component instance. This is important when React is managing the state of components, such as when you have components with local state or components that maintain focus or scroll position.
+***2: 
 */
